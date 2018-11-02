@@ -1,4 +1,4 @@
-2018-06-23
+2018-06-23 - Gearman Job Queue Presentation
 
 30 minute presentation for the [LA PHP Developers Group](https://www.meetup.com/laphpdev/)
 
