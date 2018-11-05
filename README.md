@@ -11,3 +11,7 @@
 ## Arduino - C/C++
 
 * [2018 - Beginner Arduino Workshop](2018-05-09-arduino-beginner-workshop)
+
+## General
+
+* [2018 - Global Day of Coderetreat](2018-11-17-gdcr-event)
