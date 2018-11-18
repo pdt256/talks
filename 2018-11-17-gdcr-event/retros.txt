@@ -19,4 +19,15 @@ TDD as if you meant it
 * Forced to write detailed test name
 
 Choose your own adventure
-*
+* Mute Pair
+  * Wow, can have remote teams, with right dicipline
+  * Hard getting started
+  * Seamless
+  * Names were descriptive, easy to read
+* No Return
+  * Simplified logic
+  * More setup, less one-line code
+* Reused constraints:
+  * TDD - felt natrual with a pair
+  * TDD AIYMI - for first test
+  * Baby Steps - worked in small increments, but not deleting code
