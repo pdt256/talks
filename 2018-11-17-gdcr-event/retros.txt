@@ -1,0 +1,22 @@
+TDD Exercise
+* Learned: TDD, Pairing, Python
+* Working in small increments
+* Knowledge gaps were apparent
+* At least 1 knows the language is all that was required
+* Test cases helped identify simple gate solution
+
+Baby Steps
+* Focus on small problems
+* Easy to see what fails
+* Could get more done in 2 min than thought
+* Less time typing, more time thinking
+* Less rework, when we thought this challenge would involve more rework
+* Simpler design using points instead of 2D matrix
+
+TDD as if you meant it
+* Given, When, Then
+* Different solution after every exercise
+* Forced to write detailed test name
+
+Choose your own adventure
+*
