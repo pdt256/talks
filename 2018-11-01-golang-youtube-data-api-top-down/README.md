@@ -7,3 +7,5 @@ We explored how to write a Go command line application to upload a video to YouT
 * Slides: [Youtube-Data-API-Top-Down.pdf](Youtube-Data-API-Top-Down.pdf)
 * Video: https://youtu.be/PojkUwBE2ZY?t=145
 * Pull Request: https://github.com/go-study-group/videos/pull/2
+
+![screenshot](https://github.com/pdt256/talks/raw/master/2018-11-01-golang-youtube-data-api-top-down/photos/screenshot.jpg)
