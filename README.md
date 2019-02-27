@@ -1,17 +1,14 @@
 # My Talks and Speaking Engagements
 
-## Go
+## Proposals
 
-* [2018 - Youtube Data API - Top Down](2018-11-01-golang-youtube-data-api-top-down)
+* [Top Down Design in Go](https://www.papercall.io/speakers/jamie/speaker_talks/108489-top-down-design-in-go)
 
-## PHP
+---
 
-* [2016 - Gearman Job Queue](2016-06-23-php-gearman-job-queue)
+## Talks
 
-## Arduino - C/C++
-
-* [2018 - Beginner Arduino Workshop](2018-05-09-arduino-beginner-workshop)
-
-## General
-
-* [2018 - Global Day of Coderetreat](2018-11-17-gdcr-event)
+* [2018 - Youtube Data API - Top Down](2018-11-01-golang-youtube-data-api-top-down) (Go)
+* [2018 - Global Day of Coderetreat](2018-11-17-gdcr-event) (Craftsmanship)
+* [2018 - Beginner Arduino Workshop](2018-05-09-arduino-beginner-workshop) (Arduino C/C++)
+* [2016 - Gearman Job Queue](2016-06-23-php-gearman-job-queue) (PHP)
