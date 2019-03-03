@@ -2,7 +2,7 @@
 
 30 min live coding presentation for the [Go Study Group](https://gophersource.com/study-group/).
 
-We explored how to write unit tests in Go. We began with the basic structure of unit testing. Then we dive into the Gilde Rose [Kata](https://en.wikipedia.org/wiki/Kata_(programming)).
+We explored how to write unit tests in Go. We began with the basic structure of unit testing. Then we dove into the Gilde Rose [Kata](https://en.wikipedia.org/wiki/Kata_(programming)).
 
  
 * Video: https://youtu.be/t4zrFOlGVdE?t=512
