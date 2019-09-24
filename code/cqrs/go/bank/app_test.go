@@ -59,6 +59,10 @@ func TestDepositMoney_WhenAccountExists_Emits_MoneyWasDeposited(t *testing.T) {
 		aggregateId,
 		bank.AccountWasOpened{
 			AccountId: accountId,
+		},
+		bank.DepositMoney{
+			AccountId: accountId,
+			Amount:    50,
 		})
 
 	// When
@@ -71,8 +75,9 @@ func TestDepositMoney_WhenAccountExists_Emits_MoneyWasDeposited(t *testing.T) {
 	// Then
 	ExpectEmittedEvents(t, app,
 		bank.MoneyWasDeposited{
-			AccountId: accountId,
-			Amount:    100,
+			AccountId:  accountId,
+			Amount:     100,
+			NewBalance: 150,
 		})
 }
 
