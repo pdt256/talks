@@ -28,10 +28,10 @@ func (a *AccountAggregate) transition(e event.Event) {
 	case AccountWasOpened:
 		a.state.isOpen = true
 
-	case DepositMoney:
+	case MoneyWasDeposited:
 		a.state.balance += e.Amount
 
-	case WithdrawMoney:
+	case MoneyWasWithdrawn:
 		a.state.balance -= e.Amount
 
 	}

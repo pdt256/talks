@@ -60,7 +60,7 @@ func TestDepositMoney_WhenAccountExists_Emits_MoneyWasDeposited(t *testing.T) {
 		bank.AccountWasOpened{
 			AccountId: accountId,
 		},
-		bank.DepositMoney{
+		bank.MoneyWasDeposited{
 			AccountId: accountId,
 			Amount:    50,
 		})
@@ -89,7 +89,7 @@ func TestWithdrawMoney_WhenFundsAreNotAvailable_Emits_WithdrawDenied(t *testing.
 		bank.AccountWasOpened{
 			AccountId: accountId,
 		},
-		bank.DepositMoney{
+		bank.MoneyWasDeposited{
 			AccountId: accountId,
 			Amount:    50,
 		})
@@ -118,11 +118,11 @@ func TestWithdrawMoney_WhenFundsAreNotAvailableAfterPreviousWithdrawal_Emits_Wit
 		bank.AccountWasOpened{
 			AccountId: accountId,
 		},
-		bank.DepositMoney{
+		bank.MoneyWasDeposited{
 			AccountId: accountId,
 			Amount:    50,
 		},
-		bank.WithdrawMoney{
+		bank.MoneyWasWithdrawn{
 			AccountId: accountId,
 			Amount:    40,
 		})
@@ -151,7 +151,7 @@ func TestWithdrawMoney_WhenFundsAreAvailable_Emits_MoneyWasWithdrawn(t *testing.
 		bank.AccountWasOpened{
 			AccountId: accountId,
 		},
-		bank.DepositMoney{
+		bank.MoneyWasDeposited{
 			AccountId: accountId,
 			Amount:    100,
 		})
@@ -180,7 +180,7 @@ func TestCloseAccount_WhenFundsAreStillInAccount_Emits_FailedToCloseAccountWithB
 		bank.AccountWasOpened{
 			AccountId: accountId,
 		},
-		bank.DepositMoney{
+		bank.MoneyWasDeposited{
 			AccountId: accountId,
 			Amount:    100,
 		})
