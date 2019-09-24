@@ -5,8 +5,6 @@ import (
 )
 
 type AccountAggregate struct {
-	Id            string
-	History       []event.Event
 	PendingEvents []event.Event
 	state         struct {
 		isOpen  bool
@@ -15,10 +13,7 @@ type AccountAggregate struct {
 }
 
 func NewAccountAggregate(id string, events []event.Event) *AccountAggregate {
-	aggregate := &AccountAggregate{
-		Id:      id,
-		History: events,
-	}
+	aggregate := &AccountAggregate{}
 
 	for _, e := range events {
 		aggregate.transition(e)
