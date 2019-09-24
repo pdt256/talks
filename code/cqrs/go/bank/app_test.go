@@ -81,7 +81,7 @@ func TestDepositMoney_WhenAccountExists_Emits_MoneyWasDeposited(t *testing.T) {
 		})
 }
 
-func TestWithdrawMoney_WhenFundsAreNotAvailable_Emits_WithDrawDenied(t *testing.T) {
+func TestWithdrawMoney_WhenFundsAreNotAvailable_Emits_WithdrawDenied(t *testing.T) {
 	// Given
 	app := NewTestApp()
 	app.AcceptEvents(
@@ -107,6 +107,39 @@ func TestWithdrawMoney_WhenFundsAreNotAvailable_Emits_WithDrawDenied(t *testing.
 			AccountId:      accountId,
 			Amount:         100,
 			CurrentBalance: 50,
+		})
+}
+
+func TestWithdrawMoney_WhenFundsAreNotAvailableAfterPreviousWithdrawal_Emits_WithdrawDenied(t *testing.T) {
+	// Given
+	app := NewTestApp()
+	app.AcceptEvents(
+		aggregateId,
+		bank.AccountWasOpened{
+			AccountId: accountId,
+		},
+		bank.DepositMoney{
+			AccountId: accountId,
+			Amount:    50,
+		},
+		bank.WithdrawMoney{
+			AccountId: accountId,
+			Amount:    40,
+		})
+
+	// When
+	app.Execute(
+		bank.WithdrawMoney{
+			AccountId: accountId,
+			Amount:    25,
+		})
+
+	// Then
+	ExpectEmittedEvents(t, app,
+		bank.WithdrawDenied{
+			AccountId:      accountId,
+			Amount:         25,
+			CurrentBalance: 10,
 		})
 }
 

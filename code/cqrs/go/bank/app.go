@@ -33,7 +33,7 @@ func (a *App) Execute(command interface{}) {
 
 func (a *App) handleWithAccountAggregate(aggregateId string, command interface{}) {
 	events := a.eventStore.Events(aggregateId)
-	account := NewAccountAggregate(aggregateId, events)
+	account := NewAccountAggregate(events)
 	account.Handle(command)
 	a.eventStore.Save(aggregateId, account.PendingEvents...)
 }

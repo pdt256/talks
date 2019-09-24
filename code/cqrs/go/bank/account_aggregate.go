@@ -12,7 +12,7 @@ type AccountAggregate struct {
 	}
 }
 
-func NewAccountAggregate(id string, events []event.Event) *AccountAggregate {
+func NewAccountAggregate(events []event.Event) *AccountAggregate {
 	aggregate := &AccountAggregate{}
 
 	for _, e := range events {
@@ -30,6 +30,10 @@ func (a *AccountAggregate) transition(e event.Event) {
 
 	case DepositMoney:
 		a.state.balance += e.Amount
+
+	case WithdrawMoney:
+		a.state.balance -= e.Amount
+
 	}
 }
 
