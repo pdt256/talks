@@ -16,7 +16,7 @@ import (
 const accountId = "7A22F482897142ED84CDC15B02C75948"
 const aggregateId = accountId
 
-func TestOpenAccount_Emits_AccountWasOpen(t *testing.T) {
+func TestOpenAccount_Emits_AccountWasOpened(t *testing.T) {
 	// Given
 	app := NewTestApp()
 
