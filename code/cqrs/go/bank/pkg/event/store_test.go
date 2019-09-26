@@ -10,17 +10,17 @@ import (
 )
 
 func TestInMemoryEventStore(t *testing.T) {
-	VerifyStoreInterface(t, event.NewInMemoryEventStore)
+	VerifyStoreInterface(t, event.NewInMemoryEventStore, event.NewEmptyBus)
 }
 
-func VerifyStoreInterface(t *testing.T, newStore func() event.Store) {
+func VerifyStoreInterface(t *testing.T, newStore func(bus event.Bus) event.Store, newBus func() event.Bus) {
 	type AccountWasOpened struct {
 		Name string
 	}
 
 	t.Run("save event to store by aggregate id", func(t *testing.T) {
 		// Given
-		store := newStore()
+		store := newStore(newBus())
 		event1 := AccountWasOpened{Name: "John Doe"}
 		event2 := AccountWasOpened{Name: "Jane Doe"}
 
@@ -36,7 +36,7 @@ func VerifyStoreInterface(t *testing.T, newStore func() event.Store) {
 
 	t.Run("get events from store by aggregate id", func(t *testing.T) {
 		// Given
-		store := newStore()
+		store := newStore(newBus())
 		event1 := AccountWasOpened{Name: "John Doe"}
 		event2 := AccountWasOpened{Name: "Jane Doe"}
 

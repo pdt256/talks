@@ -11,11 +11,13 @@ type Store interface {
 type InMemoryEventStore struct {
 	events            []Event
 	eventsByAggregate map[string][]Event
+	bus               Bus
 }
 
-func NewInMemoryEventStore() Store {
+func NewInMemoryEventStore(bus Bus) Store {
 	return &InMemoryEventStore{
 		eventsByAggregate: make(map[string][]Event),
+		bus:               bus,
 	}
 }
 
@@ -30,4 +32,5 @@ func (s *InMemoryEventStore) Events(aggregateId string) []Event {
 func (s *InMemoryEventStore) Save(aggregateId string, event ...Event) {
 	s.events = append(s.events, event...)
 	s.eventsByAggregate[aggregateId] = append(s.eventsByAggregate[aggregateId], event...)
+	s.bus.Publish(event...)
 }

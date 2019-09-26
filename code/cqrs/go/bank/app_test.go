@@ -222,7 +222,7 @@ func TestCloseAccount_WithEmptyAccount_Emits_AccountWasClosed(t *testing.T) {
 }
 
 func NewTestApp() *bank.App {
-	return bank.NewApp(event.NewInMemoryEventStore())
+	return bank.NewApp(event.NewInMemoryEventStore(event.NewEmptyBus()))
 }
 
 func ExpectEmittedEvents(t *testing.T, app *bank.App, expectedEvents ...event.Event) {
