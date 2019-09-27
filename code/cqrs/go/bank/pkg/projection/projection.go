@@ -22,6 +22,12 @@ type accountFunds struct {
 	AccountBalance map[string]int
 }
 
+func NewAccountFunds() *accountFunds {
+	return &accountFunds{
+		AccountBalance: make(map[string]int),
+	}
+}
+
 func (a *accountFunds) Accept(event event.Event) {
 	switch e := event.(type) {
 
@@ -33,11 +39,5 @@ func (a *accountFunds) Accept(event event.Event) {
 		a.TotalFunds -= e.Amount
 		a.AccountBalance[e.AccountId] -= e.Amount
 
-	}
-}
-
-func NewAccountFunds() *accountFunds {
-	return &accountFunds{
-		AccountBalance: make(map[string]int),
 	}
 }
