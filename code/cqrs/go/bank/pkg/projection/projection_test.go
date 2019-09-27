@@ -10,15 +10,14 @@ import (
 	"github.com/pdt256/talks/code/cqrs/go/bank/pkg/projection"
 )
 
-const aggregateId = "E659E9A52BD9438A8200EDC521194DAA"
-
 func TestCountEvents_CalculatesTotalEvents(t *testing.T) {
 	// Given
 	countEvents := projection.NewCountEvents()
-	app := NewTestApp(countEvents)
+	bus := event.NewInMemoryEventBus()
+	bus.Subscribe(countEvents)
 
 	// When
-	app.AcceptEvents(aggregateId,
+	bus.Publish(
 		bank.AccountWasOpened{AccountId: "A"},
 		bank.MoneyWasDeposited{AccountId: "A", Amount: 100},
 		bank.MoneyWasWithdrawn{AccountId: "A", Amount: 75},
@@ -33,10 +32,11 @@ func TestCountEvents_CalculatesTotalEvents(t *testing.T) {
 func TestAccountFunds_CalculatesTotalFundsAndAccountBalances(t *testing.T) {
 	// Given
 	accountFunds := projection.NewAccountFunds()
-	app := NewTestApp(accountFunds)
+	bus := event.NewInMemoryEventBus()
+	bus.Subscribe(accountFunds)
 
 	// When
-	app.AcceptEvents(aggregateId,
+	bus.Publish(
 		bank.AccountWasOpened{AccountId: "A"},
 		bank.MoneyWasDeposited{AccountId: "A", Amount: 100},
 		bank.MoneyWasWithdrawn{AccountId: "A", Amount: 50},
@@ -48,11 +48,4 @@ func TestAccountFunds_CalculatesTotalFundsAndAccountBalances(t *testing.T) {
 	assert.Equal(t, 75, accountFunds.TotalFunds)
 	assert.Equal(t, 50, accountFunds.AccountBalance["A"])
 	assert.Equal(t, 25, accountFunds.AccountBalance["B"])
-}
-
-func NewTestApp(subscriber event.Subscriber) *bank.App {
-	bus := event.NewInMemoryEventBus()
-	bus.Subscribe(subscriber)
-	eventStore := event.NewInMemoryEventStore(bus)
-	return bank.NewApp(eventStore)
 }
