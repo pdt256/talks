@@ -10,7 +10,7 @@
 
 ### 2019
 
-* [2019 - Event Storming - From Stickie Notes to Code](2019-09-25-event-storming-from-stickie-notes-to-code) (DDD / CQRS / Event Sourcing / Go)
+* [2019 - Event Storming - From Sticky Notes to Code](2019-09-25-event-storming-from-sticky-notes-to-code) (DDD / CQRS / Event Sourcing / Go)
 * [2019 - Unit Tests - Gilded Rose Kata in Go](2019-02-28-go-unit-tests-gilded-rose) (Go)
 
 ### 2018
