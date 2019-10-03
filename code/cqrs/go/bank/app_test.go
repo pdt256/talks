@@ -11,6 +11,8 @@ import (
 
 	"github.com/pdt256/talks/code/cqrs/go/bank"
 	"github.com/pdt256/talks/code/cqrs/go/bank/pkg/event"
+	"github.com/pdt256/talks/code/cqrs/go/bank/pkg/event/provider/inmemorybus"
+	"github.com/pdt256/talks/code/cqrs/go/bank/pkg/event/provider/inmemorystore"
 )
 
 const accountId = "7A22F482897142ED84CDC15B02C75948"
@@ -222,7 +224,7 @@ func TestCloseAccount_WithEmptyAccount_Emits_AccountWasClosed(t *testing.T) {
 }
 
 func NewTestApp() *bank.App {
-	return bank.NewApp(event.NewInMemoryEventStore(event.NewEmptyBus()))
+	return bank.NewApp(inmemorystore.New(inmemorybus.New()))
 }
 
 func ExpectEmittedEvents(t *testing.T, app *bank.App, expectedEvents ...event.Event) {

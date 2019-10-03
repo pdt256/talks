@@ -6,14 +6,14 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/pdt256/talks/code/cqrs/go/bank"
-	"github.com/pdt256/talks/code/cqrs/go/bank/pkg/event"
+	"github.com/pdt256/talks/code/cqrs/go/bank/pkg/event/provider/inmemorybus"
 	"github.com/pdt256/talks/code/cqrs/go/bank/pkg/projection"
 )
 
 func TestCountEvents_CalculatesTotalEvents(t *testing.T) {
 	// Given
 	countEvents := projection.NewCountEvents()
-	bus := event.NewInMemoryEventBus()
+	bus := inmemorybus.New()
 	bus.Subscribe(countEvents)
 
 	// When
@@ -32,7 +32,7 @@ func TestCountEvents_CalculatesTotalEvents(t *testing.T) {
 func TestAccountFunds_CalculatesTotalFundsAndAccountBalances(t *testing.T) {
 	// Given
 	accountFunds := projection.NewAccountFunds()
-	bus := event.NewInMemoryEventBus()
+	bus := inmemorybus.New()
 	bus.Subscribe(accountFunds)
 
 	// When
