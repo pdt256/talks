@@ -1,5 +1,7 @@
 package bank
 
+//go:generate go run gen/eventbinder/main.go -file events.go
+
 type AccountWasOpened struct {
 	AccountId string
 }
