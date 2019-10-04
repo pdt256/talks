@@ -3,7 +3,6 @@ package leveldbstore
 import (
 	"fmt"
 	"log"
-	"strings"
 
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/util"
@@ -72,11 +71,7 @@ func (s *store) eventsByPrefix(keyPrefix string) []event.Event {
 
 	iter := s.db.NewIterator(util.BytesPrefix([]byte(keyPrefix)), nil)
 	for iter.Next() {
-		tokens := strings.Split(string(iter.Key()), Separator)
-		eventTypeName := tokens[2]
-		value := iter.Value()
-
-		e, err := s.serializer.Deserialize(value, eventTypeName)
+		e, err := s.serializer.Deserialize(iter.Value())
 		if err != nil {
 			log.Fatalf("failed deserializing event: %v", err)
 		}
@@ -96,8 +91,8 @@ func (s *store) Save(aggregateId string, events ...event.Event) error {
 		if err != nil {
 			return err
 		}
-		eventTypeName, _ := event.Type(e)
-		batch.Put([]byte(EventPrefix+aggregateId+Separator+eventTypeName), data)
+
+		batch.Put([]byte(EventPrefix+aggregateId), data)
 	}
 
 	return s.db.Write(batch, nil)

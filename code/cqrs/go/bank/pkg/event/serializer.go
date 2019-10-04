@@ -7,7 +7,7 @@ import (
 type Serializer interface {
 	Bind(events ...Event)
 	Serialize(event Event) ([]byte, error)
-	Deserialize(serializedData []byte, eventTypeName string) (Event, error)
+	Deserialize(serializedData []byte) (Event, error)
 }
 
 func Type(event Event) (string, reflect.Type) {
