@@ -55,8 +55,12 @@ package bank
 
 import "github.com/pdt256/talks/code/cqrs/go/bank/pkg/event"
 
-func BindEvents(serializer event.Serializer) {
-	serializer.Bind({{ range .EventNames }}
+type eventBinder interface {
+	Bind(events ...event.Event)
+}
+
+func BindEvents(binder eventBinder) {
+	binder.Bind({{ range .EventNames }}
 		{{ . }}{},{{ end }}
 	)
 }
