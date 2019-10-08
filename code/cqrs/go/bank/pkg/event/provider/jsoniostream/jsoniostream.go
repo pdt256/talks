@@ -2,23 +2,20 @@ package jsoniostream
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"log"
 	"reflect"
-
-	"github.com/mitchellh/mapstructure"
 
 	"github.com/pdt256/talks/code/cqrs/go/bank/pkg/event"
 )
 
 type stream struct {
-	reader     io.Reader
 	eventTypes map[string]reflect.Type
 }
 
-func New(reader io.Reader) *stream {
+func New() *stream {
 	return &stream{
-		reader:     reader,
 		eventTypes: map[string]reflect.Type{},
 	}
 }
@@ -32,16 +29,17 @@ func (s *stream) Bind(events ...event.Event) {
 
 type jsonEvent struct {
 	EventTypeName string      `json:"type"`
-	Event         event.Event `json:"payload"`
+	Event         interface{} `json:"payload"`
 }
 
-func (s *stream) Load() <-chan event.Event {
+func (s *stream) Load(reader io.Reader) <-chan event.Event {
 	ch := make(chan event.Event)
 
 	go func() {
 		defer close(ch)
 
-		decoder := json.NewDecoder(s.reader)
+		decoder := json.NewDecoder(reader)
+		decoder.UseNumber()
 		_, err := decoder.Token()
 		if err != nil {
 			log.Print(err)
@@ -49,7 +47,10 @@ func (s *stream) Load() <-chan event.Event {
 		}
 
 		for decoder.More() {
-			wrapper := jsonEvent{}
+			var rawEvent json.RawMessage
+			wrapper := jsonEvent{
+				Event: &rawEvent,
+			}
 			err := decoder.Decode(&wrapper)
 			if err != nil {
 				log.Print(err)
@@ -63,15 +64,48 @@ func (s *stream) Load() <-chan event.Event {
 			}
 
 			e := reflect.New(eventType).Interface()
-			err = mapstructure.Decode(wrapper.Event, e)
+			err = json.Unmarshal(rawEvent, e)
 			if err != nil {
 				log.Printf("failed unmarshalling event: %v", err)
 				continue
 			}
 
-			ch <- e
+			ch <- e.(event.Event)
 		}
 	}()
 
 	return ch
+}
+
+func (s *stream) Save(writer io.Writer, events <-chan event.Event) <-chan error {
+	errors := make(chan error)
+	go func() {
+		totalSaved := 0
+
+		_, _ = fmt.Fprint(writer, "[")
+
+		for e := range events {
+			eventTypeName, _ := event.Type(e)
+			data, err := json.Marshal(jsonEvent{
+				EventTypeName: eventTypeName,
+				Event:         e,
+			})
+			if err != nil {
+				errors <- fmt.Errorf("failed marshalling jsonEvent: %v", err)
+			}
+
+			if totalSaved > 0 {
+				_, _ = fmt.Fprint(writer, ",")
+			}
+
+			_, _ = fmt.Fprintf(writer, "%s", data)
+
+			totalSaved++
+		}
+		_, _ = fmt.Fprint(writer, "]")
+
+		close(errors)
+	}()
+
+	return errors
 }

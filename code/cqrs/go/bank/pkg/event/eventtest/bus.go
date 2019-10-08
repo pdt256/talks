@@ -9,10 +9,6 @@ import (
 )
 
 func VerifyBus(t *testing.T, newBus func() (bus event.Bus)) {
-	type ThingWasDone struct {
-		Name string
-	}
-
 	t.Run("publish events to subscriber", func(t *testing.T) {
 		// Given
 		subscriber := &loggingSubscriber{}

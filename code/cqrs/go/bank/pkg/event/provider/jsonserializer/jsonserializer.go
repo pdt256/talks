@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/mitchellh/mapstructure"
-
 	"github.com/pdt256/talks/code/cqrs/go/bank/pkg/event"
 )
 
@@ -29,7 +27,7 @@ func (s *serializer) Bind(events ...event.Event) {
 
 type jsonEvent struct {
 	EventTypeName string      `json:"type"`
-	Event         event.Event `json:"payload"`
+	Event         interface{} `json:"payload"`
 }
 
 func (s *serializer) Serialize(e event.Event) ([]byte, error) {
@@ -46,10 +44,13 @@ func (s *serializer) Serialize(e event.Event) ([]byte, error) {
 }
 
 func (s *serializer) Deserialize(serializedData []byte) (event.Event, error) {
-	wrapper := jsonEvent{}
+	var rawEvent json.RawMessage
+	wrapper := jsonEvent{
+		Event: &rawEvent,
+	}
 	err := json.Unmarshal(serializedData, &wrapper)
 	if err != nil {
-		return nil, fmt.Errorf("failed unmarshalling jsonEvent: %v", err)
+		return nil, fmt.Errorf("failed unmarshalling jsonEvent [%s]: %v", serializedData, err)
 	}
 
 	eventType, ok := s.eventTypes[wrapper.EventTypeName]
@@ -58,10 +59,10 @@ func (s *serializer) Deserialize(serializedData []byte) (event.Event, error) {
 	}
 
 	e := reflect.New(eventType).Interface()
-	err = mapstructure.Decode(wrapper.Event, e)
+	err = json.Unmarshal(rawEvent, e)
 	if err != nil {
 		return nil, fmt.Errorf("failed unmarshalling event: %v", err)
 	}
 
-	return e, nil
+	return e.(event.Event), nil
 }

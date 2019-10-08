@@ -10,17 +10,13 @@ import (
 )
 
 func VerifyStore(t *testing.T, newStore func() (store event.Store, tearDown func())) {
-	type AccountWasOpened struct {
-		Name string
-	}
-
 	t.Run("save event to store by aggregate id", func(t *testing.T) {
 		// Given
 		store, tearDown := newStore()
 		defer tearDown()
-		store.Bind(&AccountWasOpened{})
-		event1 := &AccountWasOpened{Name: "John Doe"}
-		event2 := &AccountWasOpened{Name: "Jane Doe"}
+		store.Bind(&ThingWasDone{})
+		event1 := &ThingWasDone{Name: "John Doe"}
+		event2 := &ThingWasDone{Name: "Jane Doe"}
 
 		// When
 		_ = store.Save("1", event1)
@@ -36,9 +32,9 @@ func VerifyStore(t *testing.T, newStore func() (store event.Store, tearDown func
 		// Given
 		store, tearDown := newStore()
 		defer tearDown()
-		store.Bind(&AccountWasOpened{})
-		event1 := &AccountWasOpened{Name: "John Doe"}
-		event2 := &AccountWasOpened{Name: "Jane Doe"}
+		store.Bind(&ThingWasDone{})
+		event1 := &ThingWasDone{Name: "John Doe"}
+		event2 := &ThingWasDone{Name: "Jane Doe"}
 
 		// When
 		_ = store.Save("3", event1)

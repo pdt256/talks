@@ -1,5 +1,8 @@
 package event
 
+import "io"
+
 type Stream interface {
-	Load() <-chan Event
+	Load(io.Reader) <-chan Event
+	Save(io.Writer, <-chan Event) <-chan error
 }
