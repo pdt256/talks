@@ -61,13 +61,13 @@ func TestProjections(t *testing.T) {
 	assert.Equal(t, "75176d7a-8465-44cd-bfc5-de8a817443e5 - Michelle Allen: 452795", top5Balance[4].String())
 
 	// Find the top 5 accounts with the highest balance by month.
-	top5ByMonth := accountBalance.GetTop5AccountsByBalanceForMonth("2019-01")
-	assert.Equal(t, "1dffa3a4-fdd9-4223-aa72-84ba9ee2c3ed - Julia Taylor: 46608", top5ByMonth[0].String())
-	assert.Equal(t, "708e7b98-2608-40c0-bcae-fe7fdc3f91eb - Eric Howard: 39492", top5ByMonth[1].String())
-	assert.Equal(t, "ff18dea6-c03b-4fe5-b176-6c7f79d5bb63 - Justin Fernandez: 37254", top5ByMonth[2].String())
-	assert.Equal(t, "7433d705-fba3-4294-83dd-ace6a60b9bef - Randy Edwards: 35926", top5ByMonth[3].String())
-	assert.Equal(t, "71f91d35-20cc-429d-b6d1-5b2ffb39a841 - Annie Larson: 33216", top5ByMonth[4].String())
-	accountBalance.PrintTop5AccountsByBalanceByMonth()
+	top5ByMonth := accountBalance.GetTop5AccountsByBalanceForMonth("2019-12")
+	assert.Equal(t, "8cd15986-a251-46da-a125-cd1d1a8e526e - Alan Howell: 340858", top5ByMonth[0].String())
+	assert.Equal(t, "dcfd5d5e-1a62-41da-8c84-ff2ea75f77de - Lori Lawson: 286530", top5ByMonth[1].String())
+	assert.Equal(t, "f72aa989-f423-4ac3-a469-72152390937f - Debra Hayes: 284295", top5ByMonth[2].String())
+	assert.Equal(t, "112c7fa7-fc84-4c91-8d64-2dc65d59e050 - Paula Mason: 264958", top5ByMonth[3].String())
+	assert.Equal(t, "14660e92-d709-4d1f-86b2-75044b3e2ce9 - Evelyn Fox: 260446", top5ByMonth[4].String())
+	//accountBalance.PrintTop5AccountsByBalanceByMonth()
 }
 
 func GetStream() (event.Bus, event.Stream) {
