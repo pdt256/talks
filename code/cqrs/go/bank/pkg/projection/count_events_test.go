@@ -10,7 +10,7 @@ import (
 	"github.com/pdt256/talks/code/cqrs/go/bank/pkg/projection"
 )
 
-func TestCountEvents_CalculatesTotalEvents(t *testing.T) {
+func TestCountEvents_CalculatesTotals(t *testing.T) {
 	// Given
 	countEvents := projection.NewCountEvents()
 	bus := inmemorybus.New()
@@ -27,25 +27,11 @@ func TestCountEvents_CalculatesTotalEvents(t *testing.T) {
 
 	// Then
 	assert.Equal(t, 5, countEvents.TotalEvents)
-}
-
-func TestAccountFunds_CalculatesTotalFundsAndAccountBalances(t *testing.T) {
-	// Given
-	accountFunds := projection.NewAccountFunds()
-	bus := inmemorybus.New()
-	bus.Subscribe(accountFunds)
-
-	// When
-	bus.Publish(
-		bank.AccountWasOpened{AccountId: "A"},
-		bank.MoneyWasDeposited{AccountId: "A", Amount: 100},
-		bank.MoneyWasWithdrawn{AccountId: "A", Amount: 50},
-		bank.AccountWasOpened{AccountId: "B"},
-		bank.MoneyWasDeposited{AccountId: "B", Amount: 25},
-	)
-
-	// Then
-	assert.Equal(t, 75, accountFunds.TotalFunds)
-	assert.Equal(t, 50, accountFunds.AccountBalance["A"])
-	assert.Equal(t, 25, accountFunds.AccountBalance["B"])
+	expectedCounts := map[string]int{
+		"AccountWasClosed":  1,
+		"AccountWasOpened":  1,
+		"MoneyWasDeposited": 1,
+		"MoneyWasWithdrawn": 2,
+	}
+	assert.Equal(t, expectedCounts, countEvents.Counts)
 }

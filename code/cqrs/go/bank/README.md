@@ -1,9 +1,9 @@
 # CQRS-ES Bank Account Example
 
-## Generate Code for Event Binder
+## Generate Code for Event Binder, and JSON events
 
 ```
-go generate
+go generate ./...
 ```
 
 ## Run Tests

@@ -53,7 +53,7 @@ func (s *stream) Load(reader io.Reader) <-chan event.Event {
 			}
 			err := decoder.Decode(&wrapper)
 			if err != nil {
-				log.Print(err)
+				log.Printf("failed decoding: %v, %#v", err, wrapper)
 				return
 			}
 

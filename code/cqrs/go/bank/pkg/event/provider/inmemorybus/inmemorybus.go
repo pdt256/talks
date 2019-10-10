@@ -10,8 +10,8 @@ func New() event.Bus {
 	return &bus{}
 }
 
-func (b *bus) Subscribe(subscriber event.Subscriber) {
-	b.subscribers = append(b.subscribers, subscriber)
+func (b *bus) Subscribe(subscriber ...event.Subscriber) {
+	b.subscribers = append(b.subscribers, subscriber...)
 }
 
 func (b *bus) Publish(events ...event.Event) {
