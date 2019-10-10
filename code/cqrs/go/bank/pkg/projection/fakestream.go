@@ -19,7 +19,7 @@ type fakeStream struct {
 
 func NewFakeStream(seed int64, maxAccounts int) *fakeStream {
 	rand.Seed(seed)
-	uuid.SetRand(NewRandSeed(seed))
+	uuid.SetRand(rand.New(rand.NewSource(seed)))
 	fake.Seed(seed)
 
 	janFirst := time.Date(2019, 1, 1, 0, 0, 0, 0, time.UTC)
@@ -197,18 +197,4 @@ func (a *accountGenerator) Next(base event.Base) event.Event {
 
 func (a *accountGenerator) HasNext() bool {
 	return !a.isDone
-}
-
-type randSeed struct {
-	seed int64
-}
-
-func NewRandSeed(seed int64) *randSeed {
-	return &randSeed{seed: seed}
-}
-
-func (r *randSeed) Read(p []byte) (n int, err error) {
-	r.seed++
-	p[0] = byte(r.seed)
-	return 1, nil
 }
