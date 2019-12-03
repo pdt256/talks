@@ -18,7 +18,7 @@ Finally we dove deep into example code, in the Go language, to see the interacti
 * Code: [https://github.com/pdt256/talks/tree/master/code/cqrs/go/bank](https://github.com/pdt256/talks/tree/dd1e8c2b903fb8b7ca55115465b47458cf49b1ac/code/cqrs/go/bank)
 
 
-[![Event Modeling - From Sticky Notes to Go](https://github.com/pdt256/talks/raw/master/2019-10-24-event-modeling-from-sticky-notes-to-go/photos/screenshot.png)](https://youtu.be/i7_edqzneyM)
+[![Event Modeling - From Sticky Notes to Go](https://github.com/pdt256/talks/raw/master/2019-10-24-event-modeling-from-sticky-notes-to-go/photos/screenshot.jpg)](https://youtu.be/i7_edqzneyM)
 
 [![Event Modeling - From Sticky Notes to Go - Event Storming](https://github.com/pdt256/talks/raw/master/2019-10-24-event-modeling-from-sticky-notes-to-go/photos/slide-event-storming.jpg)](event-modeling-from-sticky-notes-to-go.pdf)
 [![Event Modeling - From Sticky Notes to Go - CQRS + Event Souring](https://github.com/pdt256/talks/raw/master/2019-10-24-event-modeling-from-sticky-notes-to-go/photos/slide-cqrs-es.jpg)](event-modeling-from-sticky-notes-to-go.pdf)
