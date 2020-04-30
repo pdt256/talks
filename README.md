@@ -8,6 +8,11 @@
 
 ## Talks
 
+### 2020
+
+* [Apr 2020 - OAuth2 Event Modeling in Go - Part 2](2020-04-25-oauth2-event-modeling-in-go-part-2) (DDD / CQRS / Event Sourcing / Go)
+* [Apr 2020 - OAuth2 Event Modeling in Go - Part 1](2020-04-17-oauth2-event-modeling-in-go-part-1) (DDD / CQRS / Event Sourcing / Go)
+
 ### 2019
 
 * [Oct 2019 - Event Modeling - From Sticky Notes to Go](2019-10-24-event-modeling-from-sticky-notes-to-go) (DDD / CQRS/ Event Sourcing / Go)
