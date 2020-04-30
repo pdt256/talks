@@ -10,4 +10,4 @@ This was a presentation, followed with a long Q&A session, about implementing OA
  * https://github.com/inklabs/rangedb
 * Miro: https://miro.com/app/board/o9J_kwc8qR0=/
 
-[![OAuth2 Event Modeling in Go - Part 1](https://github.com/pdt256/talks/raw/master/2020-04-25-oauth2-event-modeling-in-go-part-1/photos/video-screenshot.png)](https://youtu.be/_iSiz_JBGGM)
+[![OAuth2 Event Modeling in Go - Part 1](https://github.com/pdt256/talks/raw/master/2020-04-25-oauth2-event-modeling-in-go-part-2/photos/video-screenshot.png)](https://youtu.be/_iSiz_JBGGM)
