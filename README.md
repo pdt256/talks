@@ -2,7 +2,10 @@
 
 ## Proposals
 
-* [Top Down Design in Go](https://www.papercall.io/speakers/jamie/speaker_talks/108489-top-down-design-in-go)
+* [Top Down Design](https://www.papercall.io/speakers/jamie/speaker_talks/120451-top-down-design)
+* [Dopamine-Driven Development
+](https://www.papercall.io/speakers/jamie/speaker_talks/188450-dopamine-driven-development)
+* [Testing Event Driven Systems](https://www.papercall.io/speakers/jamie/speaker_talks/194837-testing-event-driven-systems)
 
 ---
 
