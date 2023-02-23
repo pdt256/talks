@@ -8,5 +8,5 @@ require (
 	github.com/icrowley/fake v0.0.0-20180203215853-4178557ae428
 	github.com/stretchr/testify v1.4.0
 	github.com/syndtr/goleveldb v1.0.0
-	golang.org/x/text v0.3.0
+	golang.org/x/text v0.3.8 // indirect
 )
